@@ -4,8 +4,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-})
+const routes = require('./routes');
+app.use('/', routes)
 
 app.listen(3000, () => console.log('http://localhost:3000/'))
