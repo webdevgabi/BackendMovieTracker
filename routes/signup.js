@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { hash } = require('bcrypt');
-const insertOne = require('../database/insertOne');
+const { insertOne } = require('../database/');
 
 router.post('/', async (req, res) => {
     const { displayName, username, email, password  } = req.body;
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
         password: await hash(password, 10),
     }
 
-    const isInserted = await insertOne({ collection: 'users', data: user, db: req.db})
+    const isInserted = await insertOne({ collection: 'users', data: user})
 
     if (!isInserted) {
         res.status(500).json({ status: 500, error: 'Server error' })
